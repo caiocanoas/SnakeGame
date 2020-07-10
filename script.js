@@ -7,7 +7,7 @@ snake[0] = {
     y: 8 * box
 }
 let direction = "right"
-let food = {
+let comida = {
     x: Math.floor(Math.random() * 15 + 1) * box,
     y: Math.floor(Math.random() * 15 + 1) * box
 }
@@ -26,7 +26,7 @@ function criarCobra(){
 
 function criarComida(){
     context.fillStyle = "black"
-    context.fillRect(food.x, food.y, box, box)
+    context.fillRect(comida.x, comida.y, box, box)
 }
 
 document.addEventListener('keydown', update)
@@ -56,8 +56,13 @@ function iniciarJogo(){
     if(direction == "up") snakeY -= box
     if(direction == "down") snakeY += box
 
-    snake.pop()
-
+    if(snakeX != comida.x || snakeY != comida.y){
+        snake.pop()
+    } else {
+        comida.x = Math.floor(Math.random() * 15 + 1) * box
+        comida.y = Math.floor(Math.random() * 15 + 1) * box
+    }
+    
     let newHead = {
         x: snakeX,
         y: snakeY
