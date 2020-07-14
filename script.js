@@ -19,7 +19,7 @@ function criarBG() {
 
 function criarCobra(){
     for(i=0; i<snake.length; i++){
-        context.fillStyle = "white"
+        context.fillStyle = "yellow"
         context.fillRect(snake[i].x, snake[i].y, box, box)
     }
 }
@@ -27,6 +27,11 @@ function criarCobra(){
 function criarComida(){
     context.fillStyle = "black"
     context.fillRect(comida.x, comida.y, box, box)
+}
+
+function criarMenu(){
+    context.fillStyle = "gray"
+    context.fillRect(16 * box, 0, 188, 512)
 }
 
 document.addEventListener('keydown', update)
@@ -39,21 +44,22 @@ function update(event){
 }
 
 function iniciarJogo(){
-    if(snake[0].x > 15 * box && direction == "right") snake[0].x = 0
+    if(snake[0].x > 14 * box && direction == "right") snake[0].x = 0
     if(snake[0].x < 0 && direction == "left") snake[0].x = 16 * box
-    if(snake[0].y > 15 * box && direction == "down") snake[0].y = 0
+    if(snake[0].y > 14 * box && direction == "down") snake[0].y = 0
     if(snake[0].y < 0 && direction =="up") snake[0].y = 16 * box
 
     for(i = 1; i < snake.length; i++){
         if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
             clearInterval(jogo)
-            alert('Game Over!')
+            alert('Game Over' + '\nVocê fez ' + document.getElementById('pontos').textContent + ' pontos!!')
         }
     }
 
     criarBG()
     criarCobra()
     criarComida()
+    criarMenu()
 
     let snakeX = snake[0].x
     let snakeY = snake[0].y
@@ -66,8 +72,10 @@ function iniciarJogo(){
     if(snakeX != comida.x || snakeY != comida.y){
         snake.pop()
     } else {
-        comida.x = Math.floor(Math.random() * 15 + 1) * box
-        comida.y = Math.floor(Math.random() * 15 + 1) * box
+        comida.x = Math.floor(Math.random() * 14 + 1) * box
+        comida.y = Math.floor(Math.random() * 14 + 1) * box
+        let valor = document.getElementById('pontos').textContent
+        document.getElementById('pontos').innerHTML = parseInt(valor) + 1
     }
     
     let newHead = {

@@ -7,3 +7,14 @@ body{
     flex-direction: column;
     color: goldenrod;
 }
+.pontos{
+    position: absolute;
+    top: 150px;
+    right: 370px;
+}
+.refresh-button{
+    top: 300px;
+    right: 370px;
+    width: 100px;
+    height: 70px;
+}
